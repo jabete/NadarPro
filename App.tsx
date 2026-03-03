@@ -244,18 +244,32 @@ export default function App() {
                 <PlayerModal playerId={viewedPlayerId} onClose={() => setViewedPlayerId(null)} />
             )}
 
-            <header className="glass-panel sticky top-0 z-40 border-b border-white/40 px-6 py-4 flex justify-between items-center shadow-lg">
-                <div className="flex items-center gap-3">
-                    <div className="bg-cyan-500 text-white p-2 rounded-lg font-black text-xl italic shadow-md transform skew-x-[-10deg]">
-                        <span className="block transform skew-x-[10deg]">NP</span>
+            <header className="glass-panel sticky top-0 z-40 border-b border-white/40 px-4 py-3 md:px-6 md:py-4 flex flex-col md:flex-row justify-between items-center shadow-lg gap-3 md:gap-0">
+                <div className="flex items-center gap-3 w-full md:w-auto justify-between md:justify-start">
+                    <div className="flex items-center gap-3">
+                        <div className="bg-cyan-500 text-white p-2 rounded-lg font-black text-xl italic shadow-md transform skew-x-[-10deg]">
+                            <span className="block transform skew-x-[10deg]">NP</span>
+                        </div>
+                        <div>
+                            <h1 className="font-bold text-slate-800 leading-none text-xl md:text-2xl sport-font tracking-wide">Nadar<span className="text-cyan-600">Pro</span></h1>
+                            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest bg-white/50 px-2 py-0.5 rounded-full">Temporada {day}</span>
+                        </div>
                     </div>
-                    <div>
-                        <h1 className="font-bold text-slate-800 leading-none text-2xl sport-font tracking-wide">Nadar<span className="text-cyan-600">Pro</span></h1>
-                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest bg-white/50 px-2 py-0.5 rounded-full">Temporada {day}</span>
+                    
+                    {/* Mobile Energy Display (Integrated in header top row) */}
+                    <div className="md:hidden flex flex-col items-end">
+                        <div className="flex gap-0.5">
+                            {Array.from({length: MAX_ENERGY}, (_, i) => i + 1).map(i => (
+                                <div 
+                                    key={i} 
+                                    className={`w-1.5 h-4 rounded-sm skew-x-[-10deg] transition-all duration-300 border border-white/50 ${i <= swimmer.energy ? 'bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.8)]' : 'bg-slate-200/50'}`}
+                                />
+                            ))}
+                        </div>
                     </div>
                 </div>
 
-                <div className="flex items-center gap-6">
+                <div className="hidden md:flex items-center gap-6">
                     <div className="flex flex-col items-end">
                         <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-0.5">Energía</span>
                         <div className="flex gap-1">
@@ -272,8 +286,8 @@ export default function App() {
 
             <main className="container mx-auto px-4 pt-8 max-w-5xl">
                 {/* Stats Summary - Scoreboard Style */}
-                <div className="grid grid-cols-2 md:grid-cols-7 gap-0.5 mb-8 bg-slate-900 p-2 rounded-xl shadow-2xl border-b-4 border-slate-700 overflow-hidden">
-                    <div className="col-span-2 md:col-span-1 bg-slate-800 p-3 flex flex-col justify-center items-center relative">
+                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-0.5 mb-8 bg-slate-900 p-2 rounded-xl shadow-2xl border-b-4 border-slate-700 overflow-hidden">
+                    <div className="col-span-3 sm:col-span-4 md:col-span-1 bg-slate-800 p-3 flex flex-col justify-center items-center relative mb-0.5 md:mb-0">
                          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-50"></div>
                         <div className="text-[10px] text-cyan-400 uppercase font-bold tracking-widest mb-1">NIVEL</div>
                         <div className="text-4xl font-black text-white mono-font leading-none">{swimmer.level}</div>

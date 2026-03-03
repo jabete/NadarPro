@@ -238,37 +238,39 @@ export const Competition: React.FC<CompetitionProps> = ({ swimmer, day, onRaceCo
                     ) : (
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                             {officialDocs.map(doc => (
-                                <div key={doc.distance} className="border border-slate-200 rounded-xl p-6 shadow-sm bg-white">
+                                <div key={doc.distance} className="border border-slate-200 rounded-xl p-6 shadow-sm bg-white overflow-hidden">
                                     <h3 className="text-xl font-bold border-b pb-4 mb-4 flex justify-between">
                                         <span className="sport-font text-slate-800">{doc.distance}m Libres</span>
                                         <span className="text-xs font-bold bg-slate-100 px-2 py-1 rounded text-slate-500">{doc.results.length} Participantes</span>
                                     </h3>
-                                    <table className="w-full text-sm">
-                                        <thead>
-                                            <tr className="text-slate-400 text-left text-[10px] uppercase font-bold tracking-wider">
-                                                <th className="pb-2 w-10">Pos</th>
-                                                <th className="pb-2">Nadador</th>
-                                                <th className="pb-2 text-right">Tiempo</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {doc.results.map((r) => (
-                                                <tr key={r.rank} className={`border-b last:border-0 ${r.playerId === swimmer.id ? 'bg-cyan-50' : ''}`}>
-                                                    <td className="py-2 font-mono font-bold text-slate-400">{r.rank}</td>
-                                                    <td className="py-2">
-                                                        <button 
-                                                            onClick={() => r.playerId && onViewPlayer && onViewPlayer(r.playerId)}
-                                                            className="font-bold text-slate-700 hover:text-cyan-600 text-left"
-                                                        >
-                                                            {r.swimmerName}
-                                                        </button>
-                                                        <div className="text-[10px] text-slate-500 font-bold uppercase">{r.club}</div>
-                                                    </td>
-                                                    <td className="py-2 text-right font-mono font-bold text-slate-800">{formatTime(r.time)}</td>
+                                    <div className="overflow-x-auto">
+                                        <table className="w-full text-sm">
+                                            <thead>
+                                                <tr className="text-slate-400 text-left text-[10px] uppercase font-bold tracking-wider">
+                                                    <th className="pb-2 w-10">Pos</th>
+                                                    <th className="pb-2">Nadador</th>
+                                                    <th className="pb-2 text-right">Tiempo</th>
                                                 </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                                {doc.results.map((r) => (
+                                                    <tr key={r.rank} className={`border-b last:border-0 ${r.playerId === swimmer.id ? 'bg-cyan-50' : ''}`}>
+                                                        <td className="py-2 font-mono font-bold text-slate-400">{r.rank}</td>
+                                                        <td className="py-2">
+                                                            <button 
+                                                                onClick={() => r.playerId && onViewPlayer && onViewPlayer(r.playerId)}
+                                                                className="font-bold text-slate-700 hover:text-cyan-600 text-left"
+                                                            >
+                                                                {r.swimmerName}
+                                                            </button>
+                                                            <div className="text-[10px] text-slate-500 font-bold uppercase">{r.club}</div>
+                                                        </td>
+                                                        <td className="py-2 text-right font-mono font-bold text-slate-800">{formatTime(r.time)}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             ))}
                         </div>
@@ -316,34 +318,36 @@ export const Competition: React.FC<CompetitionProps> = ({ swimmer, day, onRaceCo
                                     <span>Serie {heatNum}</span>
                                     <span>{hEntries.length} Nadadores</span>
                                 </div>
-                                <table className="w-full text-left text-sm">
-                                    <thead>
-                                        <tr className="bg-slate-50 text-slate-400 text-[10px] uppercase font-bold">
-                                            <th className="px-4 py-2 w-16 text-center">Calle</th>
-                                            <th className="px-4 py-2">Nadador</th>
-                                            <th className="px-4 py-2 hidden sm:table-cell">Club</th>
-                                            <th className="px-4 py-2 text-right">Marca</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {hEntries.map((row) => (
-                                            <tr key={row.lane} className={`border-b last:border-0 ${row.entry.isPlayer ? 'bg-cyan-50' : ''}`}>
-                                                <td className="px-4 py-3 font-mono font-bold text-center bg-slate-50/50 border-r text-slate-600">{row.lane}</td>
-                                                <td className="px-4 py-3">
-                                                    <button 
-                                                        onClick={() => row.entry.playerId && onViewPlayer && onViewPlayer(row.entry.playerId)}
-                                                        className={`font-bold hover:underline text-left ${row.entry.isPlayer ? 'text-cyan-700' : 'text-slate-700 hover:text-cyan-600'}`}
-                                                    >
-                                                        {row.entry.name}
-                                                    </button>
-                                                    <div className="sm:hidden text-xs text-slate-500">{row.entry.club}</div>
-                                                </td>
-                                                <td className="px-4 py-3 text-slate-500 text-xs uppercase font-bold hidden sm:table-cell">{row.entry.club}</td>
-                                                <td className="px-4 py-3 text-right font-mono text-slate-600">{formatTime(row.entry.entryTime)}</td>
+                                <div className="overflow-x-auto">
+                                    <table className="w-full text-left text-sm">
+                                        <thead>
+                                            <tr className="bg-slate-50 text-slate-400 text-[10px] uppercase font-bold">
+                                                <th className="px-4 py-2 w-16 text-center">Calle</th>
+                                                <th className="px-4 py-2">Nadador</th>
+                                                <th className="px-4 py-2 hidden sm:table-cell">Club</th>
+                                                <th className="px-4 py-2 text-right">Marca</th>
                                             </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            {hEntries.map((row) => (
+                                                <tr key={row.lane} className={`border-b last:border-0 ${row.entry.isPlayer ? 'bg-cyan-50' : ''}`}>
+                                                    <td className="px-4 py-3 font-mono font-bold text-center bg-slate-50/50 border-r text-slate-600">{row.lane}</td>
+                                                    <td className="px-4 py-3">
+                                                        <button 
+                                                            onClick={() => row.entry.playerId && onViewPlayer && onViewPlayer(row.entry.playerId)}
+                                                            className={`font-bold hover:underline text-left ${row.entry.isPlayer ? 'text-cyan-700' : 'text-slate-700 hover:text-cyan-600'}`}
+                                                        >
+                                                            {row.entry.name}
+                                                        </button>
+                                                        <div className="sm:hidden text-xs text-slate-500">{row.entry.club}</div>
+                                                    </td>
+                                                    <td className="px-4 py-3 text-slate-500 text-xs uppercase font-bold hidden sm:table-cell">{row.entry.club}</td>
+                                                    <td className="px-4 py-3 text-right font-mono text-slate-600">{formatTime(row.entry.entryTime)}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         );
                     })}

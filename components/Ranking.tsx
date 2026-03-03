@@ -211,126 +211,130 @@ export const Ranking: React.FC<RankingProps> = ({ onViewPlayer }) => {
 
             {tab === 'clubs' && (
                 <div className="glass-panel rounded-2xl overflow-hidden">
-                    <table className="w-full text-left">
-                        <thead className="bg-slate-100/50 text-slate-500 text-xs uppercase font-bold tracking-wider">
-                            <tr>
-                                <th className="px-6 py-4 w-20 text-center">#</th>
-                                <th className="px-6 py-4">Club</th>
-                                <th className="px-6 py-4 text-right">Prestigio</th>
-                            </tr>
-                        </thead>
-                        <tbody className="divide-y divide-slate-100/50">
-                            {clubs.length === 0 ? (
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-left">
+                            <thead className="bg-slate-100/50 text-slate-500 text-xs uppercase font-bold tracking-wider">
                                 <tr>
-                                    <td colSpan={3} className="px-6 py-12 text-center text-slate-500">
-                                        No hay clubes registrados en esta categoría.
-                                    </td>
+                                    <th className="px-6 py-4 w-20 text-center">#</th>
+                                    <th className="px-6 py-4">Club</th>
+                                    <th className="px-6 py-4 text-right">Prestigio</th>
                                 </tr>
-                            ) : (
-                                clubs.map((club, index) => (
-                                    <tr key={club.id} className="hover:bg-cyan-50/50 transition-colors">
-                                        <td className="px-6 py-4 text-center">
-                                            {index === 0 && <span className="text-2xl drop-shadow-sm">🥇</span>}
-                                            {index === 1 && <span className="text-2xl drop-shadow-sm">🥈</span>}
-                                            {index === 2 && <span className="text-2xl drop-shadow-sm">🥉</span>}
-                                            {index > 2 && <span className="font-bold text-slate-400 font-mono">#{index + 1}</span>}
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            <div className="flex items-center gap-4">
-                                                <div className={`relative w-12 h-12 rounded-full flex items-center justify-center shadow-md border-2 border-white text-xl ${club.logo.bgColor}`}>
-                                                    <span className={club.logo.color}>{club.logo.icon}</span>
-                                                    <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-white rounded-full flex items-center justify-center shadow-sm text-[10px] border border-slate-100">
-                                                        {COUNTRY_FLAGS[club.location.countryId]}
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <div className="font-bold text-slate-800 text-lg sport-font">{club.name}</div>
-                                                    <div className="text-xs text-slate-500 font-medium">
-                                                        {club.location.cityName}
-                                                        {club.location.countryId === 'ES' ? ` (${club.location.zoneId})` : ''}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="px-6 py-4 text-right">
-                                            <span className="inline-block bg-white border border-blue-100 text-blue-700 px-4 py-1.5 rounded-full font-bold text-sm shadow-sm mono-font">
-                                                {club.prestige} pts
-                                            </span>
+                            </thead>
+                            <tbody className="divide-y divide-slate-100/50">
+                                {clubs.length === 0 ? (
+                                    <tr>
+                                        <td colSpan={3} className="px-6 py-12 text-center text-slate-500">
+                                            No hay clubes registrados en esta categoría.
                                         </td>
                                     </tr>
-                                ))
-                            )}
-                        </tbody>
-                    </table>
+                                ) : (
+                                    clubs.map((club, index) => (
+                                        <tr key={club.id} className="hover:bg-cyan-50/50 transition-colors">
+                                            <td className="px-6 py-4 text-center">
+                                                {index === 0 && <span className="text-2xl drop-shadow-sm">🥇</span>}
+                                                {index === 1 && <span className="text-2xl drop-shadow-sm">🥈</span>}
+                                                {index === 2 && <span className="text-2xl drop-shadow-sm">🥉</span>}
+                                                {index > 2 && <span className="font-bold text-slate-400 font-mono">#{index + 1}</span>}
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                <div className="flex items-center gap-4">
+                                                    <div className={`relative w-12 h-12 rounded-full flex items-center justify-center shadow-md border-2 border-white text-xl ${club.logo.bgColor}`}>
+                                                        <span className={club.logo.color}>{club.logo.icon}</span>
+                                                        <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-white rounded-full flex items-center justify-center shadow-sm text-[10px] border border-slate-100">
+                                                            {COUNTRY_FLAGS[club.location.countryId]}
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div className="font-bold text-slate-800 text-lg sport-font">{club.name}</div>
+                                                        <div className="text-xs text-slate-500 font-medium">
+                                                            {club.location.cityName}
+                                                            {club.location.countryId === 'ES' ? ` (${club.location.zoneId})` : ''}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td className="px-6 py-4 text-right">
+                                                <span className="inline-block bg-white border border-blue-100 text-blue-700 px-4 py-1.5 rounded-full font-bold text-sm shadow-sm mono-font">
+                                                    {club.prestige} pts
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    ))
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             )}
 
             {tab === 'records' && (
                 <div className="glass-panel rounded-2xl overflow-hidden">
-                     <div className="flex border-b border-slate-200/50 bg-white/40">
+                     <div className="flex border-b border-slate-200/50 bg-white/40 overflow-x-auto">
                         {DISTANCES.map(dist => (
                             <button
                                 key={dist}
                                 onClick={() => setSelectedDistance(dist)}
-                                className={`flex-1 py-4 text-sm font-bold transition-all ${selectedDistance === dist ? 'bg-cyan-50 text-cyan-700 border-b-2 border-cyan-500' : 'text-slate-500 hover:bg-slate-50/50'}`}
+                                className={`flex-1 py-4 px-4 text-sm font-bold transition-all whitespace-nowrap ${selectedDistance === dist ? 'bg-cyan-50 text-cyan-700 border-b-2 border-cyan-500' : 'text-slate-500 hover:bg-slate-50/50'}`}
                             >
                                 {dist}m Libres
                             </button>
                         ))}
                      </div>
 
-                    <table className="w-full text-left">
-                        <thead className="bg-slate-100/50 text-slate-500 text-xs uppercase font-bold tracking-wider">
-                            <tr>
-                                <th className="px-6 py-4 w-20 text-center">Pos</th>
-                                <th className="px-6 py-4">Nadador</th>
-                                <th className="px-6 py-4 hidden md:table-cell">Club</th>
-                                <th className="px-6 py-4 text-right">Tiempo</th>
-                            </tr>
-                        </thead>
-                        <tbody className="divide-y divide-slate-100/50">
-                            {rankings.length === 0 ? (
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-left">
+                            <thead className="bg-slate-100/50 text-slate-500 text-xs uppercase font-bold tracking-wider">
                                 <tr>
-                                    <td colSpan={4} className="px-6 py-12 text-center text-slate-500">
-                                        Nadie ha registrado tiempos en esta distancia aún.
-                                    </td>
+                                    <th className="px-6 py-4 w-20 text-center">Pos</th>
+                                    <th className="px-6 py-4">Nadador</th>
+                                    <th className="px-6 py-4 hidden md:table-cell">Club</th>
+                                    <th className="px-6 py-4 text-right">Tiempo</th>
                                 </tr>
-                            ) : (
-                                rankings.map((row) => (
-                                    <tr key={row.swimmerId} className="hover:bg-cyan-50/50 transition-colors">
-                                        <td className="px-6 py-4 text-center">
-                                            {row.rank === 1 && <span className="text-xl">🥇</span>}
-                                            {row.rank === 2 && <span className="text-xl">🥈</span>}
-                                            {row.rank === 3 && <span className="text-xl">🥉</span>}
-                                            {row.rank > 3 && <span className="font-mono font-bold text-slate-400">#{row.rank}</span>}
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            <button 
-                                                onClick={() => onViewPlayer && onViewPlayer(row.swimmerId)}
-                                                className="font-bold text-slate-800 hover:text-cyan-600 hover:underline text-left"
-                                            >
-                                                {row.swimmerName}
-                                            </button>
-                                            <div className="text-xs text-slate-500 md:hidden flex items-center gap-1">
-                                                {COUNTRY_FLAGS[row.clubCountry]} {row.clubName}
-                                            </div>
-                                        </td>
-                                        <td className="px-6 py-4 hidden md:table-cell text-slate-600 font-medium">
-                                             <div className="flex items-center gap-2">
-                                                <span className="text-lg">{COUNTRY_FLAGS[row.clubCountry]}</span>
-                                                {row.clubName}
-                                             </div>
-                                        </td>
-                                        <td className="px-6 py-4 text-right">
-                                            <span className={`font-mono text-lg font-bold ${row.rank <= 3 ? 'text-cyan-600' : 'text-slate-700'}`}>
-                                                {formatTime(row.time)}
-                                            </span>
+                            </thead>
+                            <tbody className="divide-y divide-slate-100/50">
+                                {rankings.length === 0 ? (
+                                    <tr>
+                                        <td colSpan={4} className="px-6 py-12 text-center text-slate-500">
+                                            Nadie ha registrado tiempos en esta distancia aún.
                                         </td>
                                     </tr>
-                                ))
-                            )}
-                        </tbody>
-                    </table>
+                                ) : (
+                                    rankings.map((row) => (
+                                        <tr key={row.swimmerId} className="hover:bg-cyan-50/50 transition-colors">
+                                            <td className="px-6 py-4 text-center">
+                                                {row.rank === 1 && <span className="text-xl">🥇</span>}
+                                                {row.rank === 2 && <span className="text-xl">🥈</span>}
+                                                {row.rank === 3 && <span className="text-xl">🥉</span>}
+                                                {row.rank > 3 && <span className="font-mono font-bold text-slate-400">#{row.rank}</span>}
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                <button 
+                                                    onClick={() => onViewPlayer && onViewPlayer(row.swimmerId)}
+                                                    className="font-bold text-slate-800 hover:text-cyan-600 hover:underline text-left"
+                                                >
+                                                    {row.swimmerName}
+                                                </button>
+                                                <div className="text-xs text-slate-500 md:hidden flex items-center gap-1">
+                                                    {COUNTRY_FLAGS[row.clubCountry]} {row.clubName}
+                                                </div>
+                                            </td>
+                                            <td className="px-6 py-4 hidden md:table-cell text-slate-600 font-medium">
+                                                 <div className="flex items-center gap-2">
+                                                    <span className="text-lg">{COUNTRY_FLAGS[row.clubCountry]}</span>
+                                                    {row.clubName}
+                                                 </div>
+                                            </td>
+                                            <td className="px-6 py-4 text-right">
+                                                <span className={`font-mono text-lg font-bold ${row.rank <= 3 ? 'text-cyan-600' : 'text-slate-700'}`}>
+                                                    {formatTime(row.time)}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    ))
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             )}
         </div>

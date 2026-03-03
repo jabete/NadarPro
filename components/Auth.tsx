@@ -66,15 +66,15 @@ export const Auth: React.FC<AuthProps> = ({ onAuth, error, onClearError }) => {
         .sort((a, b) => b.prestige - a.prestige);
 
     return (
-        <div className="h-screen w-screen overflow-hidden flex bg-slate-50">
+        <div className="min-h-screen w-full flex flex-col md:flex-row bg-slate-50 overflow-x-hidden">
             {/* Left Sidebar - Branding & Actions */}
-            <div className="w-[400px] h-full bg-slate-900 text-white flex flex-col justify-between p-12 shadow-2xl relative z-10 border-r border-slate-700">
+            <div className="w-full md:w-[400px] md:h-screen bg-slate-900 text-white flex flex-col justify-between p-8 md:p-12 shadow-2xl relative z-10 border-b md:border-b-0 md:border-r border-slate-700 shrink-0">
                 <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 pointer-events-none"></div>
                 
-                <div>
-                    <div className="inline-block bg-gradient-to-br from-cyan-500 to-blue-600 text-white p-6 rounded-2xl font-black text-5xl mb-8 shadow-[0_0_20px_rgba(6,182,212,0.5)] transform -rotate-3">NP</div>
-                    <h1 className="text-5xl font-black sport-font mb-2 tracking-wide">Nadar<span className="text-cyan-400">Pro</span></h1>
-                    <p className="text-slate-400 text-lg leading-relaxed">
+                <div className="mb-8 md:mb-0">
+                    <div className="inline-block bg-gradient-to-br from-cyan-500 to-blue-600 text-white p-4 md:p-6 rounded-2xl font-black text-4xl md:text-5xl mb-6 md:mb-8 shadow-[0_0_20px_rgba(6,182,212,0.5)] transform -rotate-3">NP</div>
+                    <h1 className="text-4xl md:text-5xl font-black sport-font mb-2 tracking-wide">Nadar<span className="text-cyan-400">Pro</span></h1>
+                    <p className="text-slate-400 text-base md:text-lg leading-relaxed">
                         Gestiona tu carrera profesional. Compite en ligas nacionales e internacionales. Rompe los récords.
                     </p>
                 </div>
@@ -134,10 +134,10 @@ export const Auth: React.FC<AuthProps> = ({ onAuth, error, onClearError }) => {
             </div>
 
             {/* Right Panel - Profile Selector */}
-            <div className="flex-1 bg-slate-50 p-12 overflow-y-auto custom-scrollbar">
-                <div className="max-w-4xl mx-auto">
-                    <h2 className="text-3xl font-black text-slate-800 mb-8 uppercase tracking-widest flex items-center gap-4 border-b border-slate-200 pb-4">
-                        <span className="text-4xl">📂</span> Cargar Partida
+            <div className="flex-1 bg-slate-50 p-6 md:p-12 overflow-y-auto custom-scrollbar w-full">
+                <div className="max-w-4xl mx-auto pb-20 md:pb-0">
+                    <h2 className="text-2xl md:text-3xl font-black text-slate-800 mb-6 md:mb-8 uppercase tracking-widest flex items-center gap-4 border-b border-slate-200 pb-4">
+                        <span className="text-3xl md:text-4xl">📂</span> Cargar Partida
                     </h2>
 
                     {existingPlayers.length === 0 ? (
