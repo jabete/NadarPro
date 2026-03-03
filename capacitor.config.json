@@ -1,0 +1,6 @@
+{
+  "appId": "com.nadarpro.app",
+  "appName": "NadarPro",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
